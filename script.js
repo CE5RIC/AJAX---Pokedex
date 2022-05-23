@@ -41,7 +41,11 @@ async function findPokemon() {
     const data = await response.json();
     console.log(data);
 
+    // display pokemon ID
+    document.getElementById("pokemonId").innerHTML = data.id;
+
 }
+
 
 
 document.getElementById("search").addEventListener("click", findPokemon);
