@@ -44,8 +44,17 @@ async function findPokemon() {
     // display pokemon ID
     document.getElementById("pokemonId").innerHTML = data.id;
 
-}
 
+
+    // display pokemon image
+  
+    let img = document.getElementById("photo");
+    let finalImage = new Image;
+    finalImage.src = data['sprites']['other']['home']['front_default'];
+   img.innerHTML = '';
+   img.appendChild(finalImage);
+
+}
 
 
 document.getElementById("search").addEventListener("click", findPokemon);
