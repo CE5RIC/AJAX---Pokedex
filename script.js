@@ -1,12 +1,19 @@
 
-function fetchPokemon(){
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+
+
+
+document.getElementById("search").addEventListener("click", fetchPokemon);
+
+// function to fetch pokemon from API 
+
+function fetchPokemon() {
+    fetch("https://pokeapi.co/api/v2/pokemon/ditto")
     .then(response => response.json())
-    .then(allpokemon => console.log(allpokemon))
-  }
-
-fetchPokemon();
-
+    .then((data) => {
+        console.log(data);
+    }) 
+}
+  
 
 
 
