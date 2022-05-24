@@ -41,12 +41,20 @@ async function findPokemon() {
     const data = await response.json();
     console.log(data);
 
-    // display pokemon ID
+    
+    // Display pokemon ID
     document.getElementById("pokemonId").innerHTML = data.id;
 
+    // Display moves
+
+    document.getElementById("move").innerHTML = data['moves']['23']['move']['name'];
+    document.getElementById("move2").innerHTML = data['moves']['8']['move']['name'];
+    document.getElementById("move3").innerHTML = data['moves']['12']['move']['name'];
+    document.getElementById("move4").innerHTML = data['moves']['18']['move']['name'];
 
 
-    // display pokemon image
+
+    // Display pokemon image
   
     let img = document.getElementById("photo");
     let finalImage = new Image;
