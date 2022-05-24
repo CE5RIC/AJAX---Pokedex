@@ -121,3 +121,10 @@ Gotta catch 'em all (gotta catch 'em all)
 Pokemon!
 Gotta catch 'em all
 Pokemon!
+
+CREDITS TO:
+
+ALEXANDRE DOS SANTOS (CODEPEN)
+
+- USED HIS CSS DESIGN FROM CODEPEN FOR THE SEARCH PART, LINK AS PER BELOW:
+  https://codepen.io/alexandrejuk/pen/bKjvXx
