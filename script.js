@@ -29,6 +29,36 @@ function fetchPokemon() {
 
 const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
 
+const pokemonSpecies = "https://pokeapi.co/api/v2/pokemon-species/"
+
+const pokemonEvolution = "https://pokeapi.co/api/v2/evolution-chain/"
+
+// Async function to fetch species
+
+async function findSpecies() {
+    const chosenSpecies = document.getElementById("pokemon").value;
+    let input = chosenSpecies;
+    
+
+    const response = await fetch(`${pokemonSpecies}${input}`);
+
+     const data = await response.json();
+     console.log(data);
+}
+
+
+
+// Async function to fetch evolution
+
+async function findEvolution() {
+const chosenEvolution = document.getElementById("pokemon").value;
+let input = chosenEvolution;
+
+const response = await fetch(`${pokemonEvolution}${input}`);
+
+}
+
+
 // Async Function created so the input of the user would result in finding the right Pokémon in the API
 // 
 
@@ -39,8 +69,12 @@ async function findPokemon() {
     const response = await fetch(`${pokemonApi}${input}`);
 
     const data = await response.json();
-    console.log(data);
+    
 
+
+    // Invoke findSpecies function
+
+    findSpecies();
     
     // Display pokemon ID
     document.getElementById("pokemonId").innerHTML = data.id;
@@ -54,6 +88,12 @@ async function findPokemon() {
 
 
 
+
+    // Async function pokemon evolution
+
+
+
+    
     // Display pokemon image
   
     let img = document.getElementById("photo");
@@ -66,8 +106,6 @@ async function findPokemon() {
 
 
 document.getElementById("search").addEventListener("click", findPokemon);
-
-
 
 
 
