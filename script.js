@@ -1,116 +1,50 @@
-/*
-
-document.getElementById("search").addEventListener("click", fetchPokemon);
-
-
-
-
-// function to fetch pokemon from API 
-
-function fetchPokemon() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-    .then(response => response.json())
-    .then((data) => {
-        
-        
-    }) 
+async function getPokemon(query) {
+const data = await fetch('https://pokeapi.co/api/v2/pokemon/'+query);
+const pokemon = await data.json();
+console.log(pokemon);
+return pokemon;
 }
-*/
 
 
-// Calling any API endpoint without a resource ID or name will return a paginated list of available resources for that API. By default, a list "page" will contain up to 20 resources. If you would like to change this just add a 'limit' query parameter to the GET request, e.g. ?limit=60. You can use 'offset' to move to the next page, e.g. ?limit=60&offset=60. (Found this bit of info straight on the Pokeapi website itself) By changing the limit to 151 in my function above I was able to get all 151 Pokemons.
-
-
-
-
-// TRYING A DIFFERENT APPROACH HERE
-
-// Set PokemonAPi to a a variable which we can use in our Findpokemon function
-
-const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
-
-const pokemonSpecies = "https://pokeapi.co/api/v2/pokemon-species/"
-
-const pokemonEvolution = "https://pokeapi.co/api/v2/evolution-chain/"
-
-// Async function to fetch species
-
-async function findSpecies() {
-    const chosenSpecies = document.getElementById("pokemon").value;
-    let input = chosenSpecies;
-    
-
-    const response = await fetch(`${pokemonSpecies}${input}`);
-
-     const data = await response.json();
-     console.log(data);
+async function getSpecies(pokemon) {
+    const data = await fetch(pokemon.species.url);
+    const speciesData = await data.json();
+    console.log(speciesData);
+    return speciesData;
 }
 
 
 
-// Async function to fetch evolution
-
-async function findEvolution() {
-const chosenEvolution = document.getElementById("pokemon").value;
-let input = chosenEvolution;
-
-const response = await fetch(`${pokemonEvolution}${input}`);
-
+async function getEvolution(speciesData) {
+    const data = await fetch(speciesData.evolution_chain.url);
+    const evolutionData = await data.json();
+    console.log(evolutionData);
+    return evolutionData;
 }
 
 
-// Async Function created so the input of the user would result in finding the right Pokémon in the API
-// 
+let pokeID = 'squirtle';
 
-async function findPokemon() {
-    const chosenPokemon = document.getElementById("pokemon").value;
-    let input = chosenPokemon;
+async function getAllPokemon() {
+    const pokemon = await getPokemon(pokeID);
+    const species = await getSpecies(pokemon);
+    const evo = await getEvolution(species);
+    console.log(pokemon.sprites.front_default, species, evo);
+}
 
-    const response = await fetch(`${pokemonApi}${input}`);
-
-    const data = await response.json();
-    
-
-
-    // Invoke findSpecies function
-
-    findSpecies();
-    
-    // Display pokemon ID
-    document.getElementById("pokemonId").innerHTML = data.id;
-
-    // Display moves
-
-    document.getElementById("move").innerHTML = data['moves']['23']['move']['name'];
-    document.getElementById("move2").innerHTML = data['moves']['8']['move']['name'];
-    document.getElementById("move3").innerHTML = data['moves']['12']['move']['name'];
-    document.getElementById("move4").innerHTML = data['moves']['18']['move']['name'];
+getAllPokemon();
 
 
-
-
-    // Async function pokemon evolution
-
-
-
-    
-    // Display pokemon image
-  
-    let img = document.getElementById("photo");
-    let finalImage = new Image;
-    finalImage.src = data['sprites']['other']['home']['front_default'];
-   img.innerHTML = '';
-   img.appendChild(finalImage);
+async function displayPokemon() {
+    const pokeImage = await getPokemon(pokeID);
+    let image = document.createElement('img');
+    document.body.appendChild(image);
+    image.src = pokeImage.sprites.front_default;
+    console.log(image);
 
 }
 
-
-document.getElementById("search").addEventListener("click", findPokemon);
-
+displayPokemon();
 
 
-
-
-
-  
 
